@@ -25,4 +25,28 @@ router.get('/:id', (req, res) => {
   res.json({ id, name: 'Product 2', price: 12 });
 });
 
+router.post('/', (req, res) => {
+  const data = req.body;
+
+  res.json({ message: 'Create', data });
+});
+
+router.patch('/:id', (req, res) => {
+  const { id } = req.params;
+  const body = req.body;
+  res.json({
+    message: 'Update',
+    data: body,
+    id,
+  });
+});
+
+router.delete('/:id', (req, res) => {
+  const { id } = req.params;
+  res.json({
+    message: 'Delete',
+    id,
+  });
+});
+
 module.exports = router;
