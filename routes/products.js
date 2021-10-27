@@ -22,13 +22,15 @@ router.get('/filter', (req, res) => {
 //parametros por id
 router.get('/:id', (req, res) => {
   const { id } = req.params;
-  res.json({ id, name: 'Product 2', price: 12 });
+  id === '999'
+    ? res.status(404).json({ massage: 'Not Found' })
+    : res.status(200).json({ id, name: 'Product 2', price: 12 });
 });
 
 router.post('/', (req, res) => {
   const data = req.body;
 
-  res.json({ message: 'Create', data });
+  res.status(201).json({ message: 'Create', data });
 });
 
 router.patch('/:id', (req, res) => {
