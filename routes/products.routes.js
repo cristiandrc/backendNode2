@@ -14,10 +14,14 @@ router.get('/filter', async (req, res) => {
 });
 
 //parametros por id
-router.get('/:id', async (req, res) => {
-  const { id } = req.params;
-  const product = await service.findOne(id);
-  res.status(200).json({ message: 'findOne', product });
+router.get('/:id', async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const product = await service.findOne(id);
+    res.status(200).json({ message: 'findOne', product });
+  } catch (err) {
+    next(err);
+  }
 });
 
 router.post('/', async (req, res) => {
@@ -27,7 +31,7 @@ router.post('/', async (req, res) => {
   res.status(201).json({ message: 'Create', newProduct });
 });
 
-router.patch('/:id', async (req, res) => {
+router.patch('/:id', async (req, res, next) => {
   try {
     const { id } = req.params;
     const body = req.body;
@@ -37,9 +41,7 @@ router.patch('/:id', async (req, res) => {
       product,
     });
   } catch (err) {
-    res.status(404).json({
-      message: err.message,
-    });
+    next(err);
   }
 });
 
