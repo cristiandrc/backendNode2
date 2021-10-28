@@ -1,6 +1,7 @@
 const express = require('express');
-const app = express();
+const cors = require('cors');
 const routerApi = require('./routes');
+const app = express();
 const port = 3000;
 
 const {
@@ -11,6 +12,19 @@ const {
 
 //parcel JSON
 app.use(express.json());
+
+//Configuracion del CORS
+const whiteList = ['http://127.0.0.1:5500', 'https://miDominio.com'];
+const options = {
+  origin: (origin, callback) => {
+    if (whiteList.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('no permitido'));
+    }
+  },
+};
+app.use(cors(options));
 
 routerApi(app);
 
