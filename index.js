@@ -2,7 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const routerApi = require('./routes');
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 const {
   logErrors,
@@ -17,7 +17,7 @@ app.use(express.json());
 const whiteList = ['http://127.0.0.1:5500', 'https://miDominio.com'];
 const options = {
   origin: (origin, callback) => {
-    if (whiteList.includes(origin)) {
+    if (whiteList.includes(origin) || !origin) {
       callback(null, true);
     } else {
       callback(new Error('no permitido'));
