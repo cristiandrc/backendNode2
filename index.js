@@ -34,5 +34,5 @@ app.use(boomErrorHandler);
 app.use(errorHandler);
 
 app.listen(port, () => {
-  console.log('listen en http://localhost:3000');
+  console.log('listen en http://localhost:3000/api/v1');
 });
