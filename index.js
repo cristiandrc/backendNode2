@@ -8,6 +8,7 @@ const {
   logErrors,
   errorHandler,
   boomErrorHandler,
+  ormErrorHandler,
 } = require('./middlewares/error.handler');
 
 //parcel JSON
@@ -30,6 +31,7 @@ routerApi(app);
 
 //middleware Errors
 app.use(logErrors);
+app.use(ormErrorHandler);
 app.use(boomErrorHandler);
 app.use(errorHandler);
 
